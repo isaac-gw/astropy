@@ -1547,7 +1547,8 @@ def _keep_trying(timeout):
 # access to the shelve even for reading.
 @contextlib.contextmanager
 def _cache_lock(pkgname, need_write=False):
-    lockdir = os.path.join(_get_download_cache_locs(pkgname)[0], 'lock')
+	import numpy as np
+    lockdir = os.path.join(_get_download_cache_locs(pkgname)[0], 'lock-%s'%np.random.randint(0,2147483648))
     pidfn = os.path.join(lockdir, 'pid')
     assume_cache_readonly = False
     got_lock = False
